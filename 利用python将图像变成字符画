@@ -1,0 +1,21 @@
+from PIL import Image
+img = Image.open(r'C:\Users\Administrator\Desktop\ig.jpg')
+width,height = img.size
+if width > 100:
+    n = width//100
+else:
+    n = 1
+width = int(width/n/1.2)
+height = int(height/n)
+img = img.resize((width,height))
+chars = '埃及牛逼'
+temp = ''
+fb = open(r'C:\Users\Administrator\Desktop\img.txt','w')
+for j in range(height):
+    for i in range(width):
+        r,g,b = img.getpixel((i,j))
+        gray = int(0.2126*r + 0.7152*g + 0.0722*b)
+        char  = chars[int(gray/(256/len(chars)))]
+        temp += char
+    temp += '\n'
+fb.write(temp)
